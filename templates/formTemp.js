@@ -45,7 +45,7 @@ define([
                 <div class="p-3 mb-3">
                     <label for="form-coordinates" class="form-label">Coordenadas</label>
                     <input type="text" name='form-coordinates' class="form-control" id="form-coordinates" value=''
-                        placeholder="Ej. Alberdi 464">
+                        placeholder="Ej. -65 -30">
                 </div>
                 <input class="btn btn-primary" id="form-send" type="submit" value="Submit">
             </form>

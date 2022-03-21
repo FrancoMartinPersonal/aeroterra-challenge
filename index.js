@@ -3,10 +3,6 @@
 const html = String.raw
 
 
-// Instead of using data-dojo-config, we're creating a dojoConfig
-// object *before* we load dojo.js; they're functionally identical,
-// it's just easier to read this approach with a larger configuration.
-//const dojo = require('bower_components/dojo/dojo.js')
 
 //html is using with "lit-html" extension to see literal templates as html
 
@@ -15,7 +11,7 @@ function handlerSend(e) {
     console.log(e)
 }
 
-
+// TEMPLATES
 
 require([
     'dojo/dom',
@@ -34,6 +30,8 @@ require([
     //     formTemp.formTemp
     //     , greetingNode);
 });
+
+//CLOSER CONTROLLER
 
 require([
     "dojo/on",
@@ -60,6 +58,8 @@ require([
         domStyle.set(form,'display','inline')
     });
 })
+
+//FORM DATA SAVER
 
 require([
     "dojo/on",
@@ -98,8 +98,8 @@ require([
 
 });
 
-
-
+//MAP 
+ 
 require([
     "esri/config",
     "esri/Map",
@@ -133,6 +133,7 @@ require([
 
 });
 
+//MAP POINTS ADDER
 
 require(["esri/config",
     "esri/Graphic",
@@ -194,6 +195,7 @@ require(["esri/config",
     <b>Dirección</b> : ${address} <br> 
     <b>Coordeanadas</b> : ${coordinates} <br> 
     <b>teléfono</b> : ${phone} <br> 
+    <b>category</b> : ${category} <br> 
     `
         const popupTemplate = {
             title: description,
