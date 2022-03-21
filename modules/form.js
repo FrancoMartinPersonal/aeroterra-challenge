@@ -4,23 +4,27 @@ define([
     "app/increment",
     "dojo/on",
     "dojo/dom",
-], function (declare,inc,on) {
-  
-     function inc (){}
-     
-     
+], function (declare, inc, on) {
+    var form = {}
+    function inc() { }
+
+
     const html = String.raw
-   // console.log(inc)
+    // console.log(inc)
     return {
-        buttons: 
-             html`
-            <div id='div-button'>
-                <button id='buttonInc'> aumentar</button>
-                <p id='p-inc' ></p>
-                <button id='buttonDec'> decrementar</button>
-            </div>
-                `
-        
+        setForm: function (formParam) {
+           
+            form.description = formParam.description
+            form.address = formParam.address
+            form.phone = formParam.phone
+            form.category = formParam.category
+            form.coordinates = formParam.coordinates
+        },
+        getForm: function(){
+            return form
+        }
+
     };
 
 });
+

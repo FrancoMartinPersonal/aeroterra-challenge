@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/FrancoMartinPersonal/aeroterra-challenge/issues"
   },
-  "homepage": "https://github.com/FrancoMartinPersonal/aeroterra-challenge#readme"
+  "homepage": "https://github.com/FrancoMartinPersonal/aeroterra-challenge#readme",
+  "dependencies": {
+    "arcgis-js-api": "^4.22.2",
+    "dojo": "^1.17.2",
+    "esri-loader": "^3.4.0"
+  }
 }

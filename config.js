@@ -1,5 +1,6 @@
 var dojoConfig = {
     async: true,
+    parseOnLoad: true,
     // This code registers the correct location of the "demo"
     // package so we can load Dojo from the CDN whilst still
     // being able to load local modules
@@ -16,6 +17,7 @@ var dojoConfig = {
             name: "index",
             location: 'index',
         },
+        
 
     ]
 };
