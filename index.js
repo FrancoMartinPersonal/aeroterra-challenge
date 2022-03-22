@@ -23,9 +23,9 @@ require([
     var greetingNode = dom.byId('main');
     // console.log(buttonsValue.buttons, "a")
     domConstruct.place(
-      formTemp.formTemp, greetingNode)
+        formTemp.formTemp, greetingNode)
     domConstruct.place(
-      formTemp.open, greetingNode)
+        formTemp.open, greetingNode)
     // domConstruct.place(
     //     formTemp.formTemp
     //     , greetingNode);
@@ -40,22 +40,22 @@ require([
     'templates/formTemp',
     "dojo/dom-style",
     'dojo/domReady!'
-], function (on, dom, domConstruct,formTemp,domStyle) {
+], function (on, dom, domConstruct, formTemp, domStyle) {
     var close = dom.byId('form-closer')
     var greetingNode = dom.byId('main');
     var form = dom.byId('form')
     var open = dom.byId('open')
-    
+
     on(close, "click", function (evt) {
         evt.preventDefault()
         console.log('hola')
-            domStyle.set(form,'display','none')
-            domStyle.set(open,'display','inline')
+        domStyle.set(form, 'display', 'none')
+        domStyle.set(open, 'display', 'inline')
     });
     on(open, "click", function (evt) {
         evt.preventDefault()
-        domStyle.set(open,'display','none')
-        domStyle.set(form,'display','inline')
+        domStyle.set(open, 'display', 'none')
+        domStyle.set(form, 'display', 'inline')
     });
 })
 
@@ -99,7 +99,7 @@ require([
 });
 
 //MAP 
- 
+
 require([
     "esri/config",
     "esri/Map",
@@ -145,18 +145,22 @@ require(["esri/config",
     'dojo/dom',
     'dojo/dom-form',
     'app/form',
+    "dojo/dom-style",
     'dojo/domReady!',
-
-
 ], function (esriConfig, Graphic, GraphicsLayer, appForm, appMap,
     on,
     dom,
     domForm,
-    appForm) {
+    appForm,
+    domStyle) {
 
     var submit = dom.byId('form-send');
-    let form
+    var form = dom.byId('form')
+    var open = dom.byId('open')
+    var close = dom.byId('form-closer')
+
     on(submit, "click", function (evt) {
+  
 
         var description = domForm.fieldToObject('form-description');
         var address = domForm.fieldToObject('form-address');
@@ -214,5 +218,12 @@ require(["esri/config",
             popupTemplate: popupTemplate
         });
         graphicsLayer.add(pointGraphic);
+
+     
+           
+           //close window
+            domStyle.set(form, 'display', 'none')
+            domStyle.set(open, 'display', 'inline')
+       
     })
 });
