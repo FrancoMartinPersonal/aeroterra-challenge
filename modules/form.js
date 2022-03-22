@@ -29,16 +29,20 @@ define([
                 phone,
                 category,
                 coordinates } = form
+                let arrayCoor = coordinates.split(' ')
             if (description.length < 1) {
-                return 'not enough information of description'
+                return 'no hay información suficiente de descripción'
             } else if (address.length < 1) {
-                return 'not enough information of address'
+                return 'no hay información suficiente de dirección'
             } else if (phone.length < 1) {
-                return 'not enough information of phone'
+                return 'no hay información suficiente de teléfono'
             }else if (category.length < 1) {
-                return 'not enough information of category'
+                return 'no hay información suficiente de categoria'
             }else if (coordinates.length < 1) {
-                return 'not enough information of coordinates'
+                return 'no hay información suficiente de coordenadas'
+            }else if(arrayCoor[0]< -180 || arrayCoor[0]> 180 || arrayCoor[1]< -90 || arrayCoor[1]> 90){
+                console.log(arrayCoor[0], arrayCoor[1])
+                return`valores posibles Longitud -180 < x < 180 ; Latitud -90 < y < 90`
             }
         }
 
