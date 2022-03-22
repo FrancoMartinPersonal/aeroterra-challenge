@@ -146,13 +146,15 @@ require(["esri/config",
     'dojo/dom-form',
     'app/form',
     "dojo/dom-style",
+    'dojo/dom-construct',
     'dojo/domReady!',
 ], function (esriConfig, Graphic, GraphicsLayer, appForm, appMap,
     on,
     dom,
     domForm,
     appForm,
-    domStyle) {
+    domStyle,
+    domConstruct) {
 
     var submit = dom.byId('form-send');
     var form = dom.byId('form')
@@ -160,70 +162,80 @@ require(["esri/config",
     var close = dom.byId('form-closer')
 
     on(submit, "click", function (evt) {
-  
 
-        var description = domForm.fieldToObject('form-description');
-        var address = domForm.fieldToObject('form-address');
-        var phone = domForm.fieldToObject('form-phone');
-        var category = domForm.fieldToObject('form-category');
-        var coordinates = domForm.fieldToObject('form-coordinates');
+        var errorMsg = dom.byId('errorMsg')
+        if (errorMsg) {
+            errorMsg.remove()
+            console.log(errorMsg)
+        }
         evt.preventDefault()
 
+        //console.log(appForm.getForm())
+        let errors = appForm.controlForm()
+        if (errors) {
+            domConstruct.place(
+                html`
+                <p id='errorMsg' class='text-center text-danger'>${errors}</p>
+                `
+                , form)
+        } else {
 
 
-        let map = appMap.getAll().map
-        console.log(appMap.getAll())
-        console.log(form, 'form')
-        esriConfig.apiKey = "AAPK6fc7b30249754c6f86a413a42629b2a2YqrlLnr3RqhhP6es0-A-dsNFoYV4vijPngrJhaJeXAWEmYwQbt4Kme_UbJhqIPnX";
 
-        coordinates = coordinates.split(' ')
+            let map = appMap.getAll().map
+            console.log(appMap.getAll())
+            console.log(form, 'form')
+            esriConfig.apiKey = "AAPK6fc7b30249754c6f86a413a42629b2a2YqrlLnr3RqhhP6es0-A-dsNFoYV4vijPngrJhaJeXAWEmYwQbt4Kme_UbJhqIPnX";
 
-        const graphicsLayer = new GraphicsLayer();
-        map.add(graphicsLayer);
-        const point = { //Create a point
-            type: "point",
-            longitude: coordinates[0],
-            latitude: coordinates[1]
-        };
+            let coordinates = appForm.getForm().coordinates.split(' ')
 
-        const simpleMarkerSymbol = {
-            type: "simple-marker",
-            color: [226, 119, 40],  // Orange
-            outline: {
-                color: [255, 255, 255], // White
-                width: 1
-            }
-        };
-        let content = `
-    <b>Descripción</b> : ${description} <br> 
-    <b>Dirección</b> : ${address} <br> 
-    <b>Coordeanadas</b> : ${coordinates} <br> 
-    <b>teléfono</b> : ${phone} <br> 
-    <b>category</b> : ${category} <br> 
+            const graphicsLayer = new GraphicsLayer();
+            map.add(graphicsLayer);
+            const point = { //Create a point
+                type: "point",
+                longitude: coordinates[0],
+                latitude: coordinates[1]
+            };
+
+            const simpleMarkerSymbol = {
+                type: "simple-marker",
+                color: [226, 119, 40],  // Orange
+                outline: {
+                    color: [255, 255, 255], // White
+                    width: 1
+                }
+            };
+            let content = `
+    <b>Descripción</b> : ${appForm.getForm().description} <br> 
+    <b>Dirección</b> : ${appForm.getForm().address} <br> 
+    <b>Coordeanadas</b> : ${appForm.getForm().coordinates} <br> 
+    <b>teléfono</b> : ${appForm.getForm().phone} <br> 
+    <b>categoría</b> : ${appForm.getForm().category} <br> 
     `
-        const popupTemplate = {
-            title: description,
-            content: content
-        }
+            const popupTemplate = {
+                title: appForm.getForm().description,
+                content: content
+            }
 
-        const attributes = {
-            Name: "Graphic",
-            Description: "I am a polygon"
-        }
+            const attributes = {
+                Name: "Graphic",
+                Description: "I am a polygon"
+            }
 
-        const pointGraphic = new Graphic({
-            geometry: point,
-            symbol: simpleMarkerSymbol,
-            attributes: attributes,
-            popupTemplate: popupTemplate
-        });
-        graphicsLayer.add(pointGraphic);
+            const pointGraphic = new Graphic({
+                geometry: point,
+                symbol: simpleMarkerSymbol,
+                attributes: attributes,
+                popupTemplate: popupTemplate
+            });
+            graphicsLayer.add(pointGraphic);
 
-     
-           
-           //close window
+
+
+            //close window
             domStyle.set(form, 'display', 'none')
             domStyle.set(open, 'display', 'inline')
-       
+        }
     })
+
 });

@@ -47,7 +47,9 @@ define([
                     <input type="text" name='form-coordinates' class="form-control" id="form-coordinates" value=''
                         placeholder="Ej. -65 -30">
                 </div>
-                <input class="btn btn-primary" id="form-send" type="submit" value="Submit">
+                <button class=" m-3 btn btn-primary text-center" id="form-send" type="submit" >
+                    submit
+                </button>
             </form>
 
                 `
