@@ -183,6 +183,7 @@ require(["esri/config",
 
 
             let map = appMap.getAll().map
+            let view = appMap.getAll().view
             console.log(appMap.getAll())
             console.log(form, 'form')
             esriConfig.apiKey = "AAPK6fc7b30249754c6f86a413a42629b2a2YqrlLnr3RqhhP6es0-A-dsNFoYV4vijPngrJhaJeXAWEmYwQbt4Kme_UbJhqIPnX";
@@ -196,7 +197,10 @@ require(["esri/config",
                 longitude: coordinates[0],
                 latitude: coordinates[1]
             };
-
+            console.log(view,'view')
+            view.goTo({
+                target:[parseFloat(coordinates[0]), parseFloat(coordinates[1])]
+            })
             const simpleMarkerSymbol = {
                 type: "simple-marker",
                 color: [226, 119, 40],  // Orange
